@@ -51,7 +51,7 @@ const Header = () => {
       <AppBar position="static" elevation={0} className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title} color="inherit" >
-            Campus Management System
+            Universal Campus
           </Typography>
 
           <Link className={classes.links} to={'/'} >

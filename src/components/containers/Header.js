@@ -10,71 +10,86 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import SearchIcon from "@mui/icons-material/Search";
+import { styled } from "@mui/material/styles";
 
-import { Link } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
-// Define styling for the header
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  title: {
-    flexGrow: 1,
-    textAlign: 'left',
-    fontType: 'bold',
-    fontFamily: 'sans-serif', 
-    fontSize: '35px', 
-    color: 'darkblue'
-  },
-  appBar:{
-    backgroundColor: '#fcb6bb',
-    shadows: ['none'],
-  },
-  greeting:{
-    display: 'flex',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    width: "50%",
-    margin: "auto",
-  },
-  links:{
-    textDecoration: 'none',
-  }
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  backgroundColor: "#F2F0EF",
+  boxShadow: "none",
+  padding: theme.spacing(0, 3),
 }));
 
-// Header component, displayed on every page
-// Links to every other page
+const Title = styled(Typography)(({ theme }) => ({
+  fontWeight: 400,
+  fontSize: "2.1rem",
+  color: "#111",
+}));
+
+const NavItem = styled(NavLink)(({ theme }) => ({
+  textDecoration: "none",
+  marginLeft: theme.spacing(3),
+
+  "& .MuiButton-root": {
+    textTransform: "none",
+    padding: theme.spacing(0.5, 2),
+    fontWeight: 400,
+    color: "#111",
+    borderRadius: 1,
+  },
+
+  "&.active-link .MuiButton-root": {
+    backgroundColor: "#e0e0e0",
+    color: "#111",
+  },
+
+}));
+
+const StyledIconButton = styled(IconButton)(({ theme }) => ({
+  color: "#111",
+  "&:hover": {
+    color: "#000",
+    backgroundColor: "rgba(25, 118, 210, 0.04)",
+  },
+}));
+
 const Header = () => {
-  const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <AppBar position="static" elevation={0} className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" className={classes.title} color="inherit" >
-            Universal Campus
-          </Typography>
+    <StyledAppBar position="static" elevation={0}>
+      <Toolbar sx={{
+        display: "grid",
+        gridTemplateColumns: "1fr auto 1fr",
+        alignItems: "center",
+      }}>
 
-          <Link className={classes.links} to={'/'} >
-            <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
-              Home
-            </Button>
-          </Link>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Title variant="h3">UniSystem</Title>
+        </Box>
 
-          <Link className={classes.links} to={'/campuses'} >
-            <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
-              All Campuses
-            </Button>
-          </Link>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <NavItem to="/" exact activeClassName="active-link">
+            <Button variant="text">Home</Button>
+          </NavItem>
 
-          <Link className={classes.links} to={'/students'} >
-            <Button variant="contained" color="primary">
-              All Students
-            </Button>
-          </Link>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );    
-}
+          <NavItem to="/campuses" activeClassName="active-link">
+            <Button variant="text">All Campuses</Button>
+          </NavItem>
+
+          <NavItem to="/students" activeClassName="active-link">
+            <Button variant="text">All Students</Button>
+          </NavItem>
+        </Box>
+
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <StyledIconButton size="large" aria-label="search">
+            <SearchIcon />
+          </StyledIconButton>
+        </Box>
+      </Toolbar>
+    </StyledAppBar>
+  );
+};
 
 export default Header;

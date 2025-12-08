@@ -28,12 +28,12 @@ const AllStudentsView = (props) => {
       {students.map((student) => {
           let name = student.firstname + " " + student.lastname;
           return (
-            <div key={student.id}>
+            <div key={student.id} className="card">
               <Link to={`/student/${student.id}`}>
                 <h2>{name}</h2>
               </Link>
               <button onClick={() => deleteStudent(student.id)}>Delete</button>
-              <hr/>
+              {/* <hr/> */}
             </div>
           );
         }

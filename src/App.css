@@ -3,3 +3,20 @@
   min-height: 100vh;
   text-align: center;
 }
+
+.container {
+  /* padding: 20px; */
+}
+
+.card {
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+
+.card h2 a {
+  text-decoration: none;
+  color: #333;
+}

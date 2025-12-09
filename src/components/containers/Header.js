@@ -23,9 +23,10 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
 }));
 
 const Title = styled(Typography)(({ theme }) => ({
-  fontWeight: 400,
+  fontWeight: 600,
   fontSize: "2.1rem",
   color: "#111",
+  letterSpacing:"-1px",
 }));
 
 const NavItem = styled(NavLink)(({ theme }) => ({
@@ -41,8 +42,8 @@ const NavItem = styled(NavLink)(({ theme }) => ({
   },
 
   "&.active-link .MuiButton-root": {
-    backgroundColor: "#e0e0e0",
-    color: "#111",
+    backgroundColor: "#D7EAF5",  // light blue
+    color: "#003A5D",
   },
 
 }));

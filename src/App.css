@@ -3,3 +3,41 @@
   min-height: 100vh;
   text-align: center;
 }
+
+.card-grid {
+  display: flex;
+  gap: 30px;
+  width: 90vw;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.card {
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  width: 290px;
+}
+
+.card p {
+  display: block;
+}
+
+.card img{
+  width: 210px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+.empty-view {
+  font-size: 1.5em;
+  letter-spacing: -0.5px;
+}
+
+.empty-view button {
+  font-size: 1rem;
+}

@@ -11,7 +11,7 @@ const AllStudentsView = (props) => {
   // If there is no student, display a message
   if (!students.length) {
     return (
-      <div>
+      <div className="empty-view">
         <p>There are no students.</p>
         <Link to={`newstudent`}>
           <button>Add New Student</button>

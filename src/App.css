@@ -19,6 +19,7 @@
   border-radius: 8px;
   text-decoration: none;
   color: #333;
+  width: 290px;
 }
 
 .card p {
@@ -30,4 +31,13 @@
   height: 200px;
   object-fit: cover;
   border-radius: 3px;
+}
+
+.empty-view {
+  font-size: 1.5em;
+  letter-spacing: -0.5px;
+}
+
+.empty-view button {
+  font-size: 1rem;
 }

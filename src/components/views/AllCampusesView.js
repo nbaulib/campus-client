@@ -12,7 +12,14 @@ const defaultImg = "https://media.istockphoto.com/id/1187802081/photo/new-york-c
 const AllCampusesView = (props) => {
   // If there is no campus, display a message.
   if (!props.allCampuses.length) {
-    return <div>There are no campuses.</div>;
+    return (
+      <div>
+        <p>There are no campuses.</p>
+        <Link to={`/`}>
+          <button>Add New Campus</button>
+        </Link>
+      </div>
+    );
   }
 
   // If there is at least one campus, render All Campuses view 

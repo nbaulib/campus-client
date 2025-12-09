@@ -7,25 +7,26 @@ It constructs a React component to display the all students view page.
 import { Link } from "react-router-dom";
 
 const AllStudentsView = (props) => {
-  const {students, deleteStudent} = props;
+  const { students, deleteStudent } = props;
   // If there is no student, display a message
   if (!students.length) {
     return (
-    <div>
-      <p>There are no students.</p>
-      <Link to={`newstudent`}>
-        <button>Add New Student</button>
-      </Link>
-    </div>
+      <div>
+        <p>There are no students.</p>
+        <Link to={`newstudent`}>
+          <button>Add New Student</button>
+        </Link>
+      </div>
     );
   }
-  
+
   // If there is at least one student, render All Students view 
   return (
     <div>
       <h1>All Students</h1>
 
-      {students.map((student) => {
+      <div className="card-grid">
+        {students.map((student) => {
           let name = student.firstname + " " + student.lastname;
           return (
             <div key={student.id} className="card">
@@ -37,12 +38,12 @@ const AllStudentsView = (props) => {
             </div>
           );
         }
-      )}
-      <br/>
+        )}
+      </div>
+
       <Link to={`/newstudent`}>
         <button>Add New Student</button>
       </Link>
-      <br/><br/>
     </div>
   );
 };

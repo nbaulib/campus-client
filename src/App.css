@@ -4,8 +4,12 @@
   text-align: center;
 }
 
-.container {
-  /* padding: 20px; */
+.card-grid {
+  display: flex;
+  gap: 30px;
+  width: 90vw;
+  margin: 0 auto;
+  justify-content: center;
 }
 
 .card {
@@ -13,16 +17,16 @@
   padding: 16px;
   margin-bottom: 16px;
   border-radius: 8px;
-}
-
-
-.card h2 a {
   text-decoration: none;
   color: #333;
 }
 
+.card p {
+  display: block;
+}
+
 .card img{
-  width: 200px;
+  width: 210px;
   height: 200px;
   object-fit: cover;
   border-radius: 3px;

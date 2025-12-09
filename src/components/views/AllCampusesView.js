@@ -20,25 +20,40 @@ const AllCampusesView = (props) => {
     <div className="container">
       <h1>All Campuses</h1>
 
-      {props.allCampuses.map((campus) => (
-        <div key={campus.id} class="card">
-          <Link to={`/campus/${campus.id}`}>
+      <div className="card-grid">
+        {props.allCampuses.map((campus) => (
+          <Link
+            key={campus.id}
+            to={`/campus/${campus.id}`}
+            className="card"
+          >
             <img
               src={campus.imageUrl || defaultImg}
               alt={campus.name}
             />
             <h2>{campus.name}</h2>
+            <h4>campus id: {campus.id}</h4>
+            <p>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                  campus.address
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="map-link"
+                onClick={(e) => e.stopPropagation()} // prevents triggering the Link click
+              >
+                {campus.address}
+              </a>
+            </p>
+            <p>{campus.description}</p>
           </Link>
-          <h4>campus id: {campus.id}</h4>
-          <p>{campus.address}</p>
-          <p>{campus.description}</p>
-        </div>
-      ))}
-      <br />
+        ))}
+      </div>
+
       <Link to={`/`}>
         <button>Add New Campus</button>
       </Link>
-      <br /><br />
     </div>
   );
 };

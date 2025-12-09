@@ -39,10 +39,10 @@ const NavItem = styled(NavLink)(({ theme }) => ({
     color: "#111",
     borderRadius: 1,
   },
-
+  
   "&.active-link .MuiButton-root": {
-    backgroundColor: "#e0e0e0",
-    color: "#111",
+    backgroundColor: "#D7EAF5",  // light blue
+    color: "#003A5D",
   },
 
 }));

@@ -7,10 +7,9 @@ It constructs a React component to display all campuses.
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const defaultImg = "https://media.istockphoto.com/id/1187802081/photo/new-york-city-skyline-with-central-park.webp?b=1&s=170667a&w=0&k=20&c=0RhKXsePfAC7qyWNZGiQu2jM45269kUhf6GtldLguq8=";
-
 const AllCampusesView = (props) => {
   // If there is no campus, display a message.
+  console.log(props.allCampuses);
   if (!props.allCampuses.length) {
     return (
       <div className="empty-view">
@@ -35,7 +34,7 @@ const AllCampusesView = (props) => {
             className="card"
           >
             <img
-              src={campus.imageUrl || defaultImg}
+              src={campus.imageUrl}
               alt={campus.name}
             />
             <h2>{campus.name}</h2>

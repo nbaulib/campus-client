@@ -72,6 +72,15 @@ const NewStudentView = ({ handleChange, handleSubmit }) => {
           <Label htmlFor="campusId">Campus Id:</Label>
           <Input type="text" name="campusId" onChange={handleChange} />
 
+          <Label htmlFor="email">Email:</Label>
+          <Input type="text" name="email" onChange={handleChange} />
+
+          <Label htmlFor="GPA">GPA:</Label>
+          <Input type="text" name="GPA" onChange={handleChange} />
+
+          <Label htmlFor="imageUrl">Image Url:</Label>
+          <Input type="text" name="imageUrl" onChange={handleChange} />
+
           <Box sx={{ marginTop: 3 }}>
             <Button variant="contained" color="primary" type="submit">
               Submit

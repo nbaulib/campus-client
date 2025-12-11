@@ -49,31 +49,29 @@ const Form = styled("form")({
 const NewStudentView = ({ handleChange, handleSubmit }) => {
   return (
     <Box>
-      <Typography variant="h4" sx={{ textAlign: "center", marginTop: 2, marginBottom: 3 }}>
+      <Typography variant="h4">
         New Student
       </Typography>
 
       <FormContainer>
         <FormTitle>
-          <Typography
-            sx={{ fontWeight: "bold", fontFamily: "Courier, sans-serif", fontSize: "20px", color: "#11153e" }}
-          >
+          <Typography>
             Add a Student
           </Typography>
         </FormTitle>
 
         <Form onSubmit={handleSubmit}>
           <Label htmlFor="firstname">First Name:</Label>
-          <Input type="text" name="firstname" onChange={handleChange} />
+          <Input type="text" name="firstname" onChange={handleChange} required/>
 
           <Label htmlFor="lastname">Last Name:</Label>
-          <Input type="text" name="lastname" onChange={handleChange} />
+          <Input type="text" name="lastname" onChange={handleChange} required/>
 
           <Label htmlFor="campusId">Campus Id:</Label>
           <Input type="text" name="campusId" onChange={handleChange} />
 
           <Label htmlFor="email">Email:</Label>
-          <Input type="text" name="email" onChange={handleChange} />
+          <Input type="text" name="email" onChange={handleChange} required/>
 
           <Label htmlFor="GPA">GPA:</Label>
           <Input type="text" name="GPA" onChange={handleChange} />

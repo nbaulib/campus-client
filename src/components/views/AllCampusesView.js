@@ -41,9 +41,9 @@ const AllCampusesView = (props) => {
             <h4>campus id: {campus.id}</h4>
             <p>
               <a
-                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                  campus.address
-                )}`}
+                href={`https://www.google.com/maps/search/?api=1&query=${
+                  encodeURIComponent(campus.address)
+                }`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="map-link"

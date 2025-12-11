@@ -20,16 +20,27 @@ const CampusView = (props) => {
       />
       <p>{campus.address}</p>
       <p>{campus.description}</p>
-      {campus.students.map(student => {
-        let name = student.firstname + " " + student.lastname;
-        return (
-          <div key={student.id}>
-            <Link to={`/student/${student.id}`}>
-              <h2>{name}</h2>
-            </Link>
-          </div>
-        );
-      })}
+      <h2>Roster</h2>
+      {/* If there are no students, display a message. */}
+      {!campus.students.length ? (
+        <div className="empty-view">
+          <p>There are no students enrolled at this campus.</p>
+          <Link to={`/newstudent`}>
+            <button>Add New Student</button>
+          </Link>
+        </div>
+      ) : (
+        campus.students.map(student => {
+          let name = student.firstname + " " + student.lastname;
+          return (
+            <div key={student.id}>
+              <Link to={`/student/${student.id}`}>
+                <h2>{name}</h2>
+              </Link>
+            </div>
+          );
+        })
+      )}
     </div>
   );
 };

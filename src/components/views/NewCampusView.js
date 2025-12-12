@@ -1,8 +1,8 @@
 /*==================================================
-NewStudentView.js
+NewCampusView.js
 
 The Views component is responsible for rendering web page with data provided by the corresponding Container component.
-It constructs a React component to display the new student page.
+It constructs a React component to display the new campus page.
 ================================================== */
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -46,35 +46,32 @@ const Form = styled("form")({
   padding: "10px",
 });
 
-const NewStudentView = ({ handleChange, handleSubmit }) => {
+const NewCampusView = ({ handleChange, handleSubmit }) => {
   return (
     <Box>
       <Typography variant="h4">
-        New Student
+        New Campus
       </Typography>
 
       <FormContainer>
         <FormTitle>
           <Typography>
-            Add a Student
+            Add a Campus
           </Typography>
         </FormTitle>
 
         <Form onSubmit={handleSubmit}>
-          <Label htmlFor="firstname">First Name:</Label>
-          <Input type="text" name="firstname" onChange={handleChange} required />
+          <Label htmlFor="name">Name:</Label>
+          <Input type="text" name="name" onChange={handleChange} required />
 
-          <Label htmlFor="lastname">Last Name:</Label>
-          <Input type="text" name="lastname" onChange={handleChange} required />
+          {/* <Label htmlFor="campusId">Campus Id:</Label>
+          <Input type="text" name="campusId" onChange={handleChange} /> */}
 
-          <Label htmlFor="campusId">Campus Id:</Label>
-          <Input type="text" name="campusId" onChange={handleChange} />
+          <Label htmlFor="address">Address:</Label>
+          <Input type="text" name="address" onChange={handleChange} required />
 
-          <Label htmlFor="email">Email:</Label>
-          <Input type="text" name="email" onChange={handleChange} required />
-
-          <Label htmlFor="GPA">GPA:</Label>
-          <Input type="text" name="GPA" onChange={handleChange} placeholder="0.0 - 4.0" step="0.01" min="0" />
+          <Label htmlFor="description">Description:</Label>
+          <Input type="text" name="description" onChange={handleChange} />
 
           <Label htmlFor="imageUrl">Image Url:</Label>
           <Input type="text" name="imageUrl" onChange={handleChange} />
@@ -90,4 +87,4 @@ const NewStudentView = ({ handleChange, handleSubmit }) => {
   );
 };
 
-export default NewStudentView;
+export default NewCampusView;

@@ -20,8 +20,6 @@ class NewCampusContainer extends Component {
     this.state = {
       name: "",
       address: "",
-      description: "",
-      imageUrl: "",
       redirect: false,
       redirectId: null
     };
@@ -53,7 +51,7 @@ class NewCampusContainer extends Component {
       name: "",
       address: "",
       description: null,
-      imageUrl: null,
+      imageUrl: "",
       redirect: true,
       redirectId: newCampus.id
     });

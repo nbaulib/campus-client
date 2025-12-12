@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const AllCampusesView = (props) => {
   // If there is no campus, display a message.
-  // console.log(props.allCampuses);
+  const { deleteCampus } = props;
   if (!props.allCampuses.length) {
     return (
       <div className="empty-view">
@@ -28,32 +28,23 @@ const AllCampusesView = (props) => {
 
       <div className="card-grid">
         {props.allCampuses.map((campus) => (
-          <Link
-            key={campus.id}
-            to={`/campus/${campus.id}`}
-            className="card"
-          >
-            <img
-              src={campus.imageUrl}
-              alt={campus.name}
-            />
-            <h2>{campus.name}</h2>
-            <h4>campus id: {campus.id}</h4>
+          <div key={campus.id} className="card">
+            <Link to={`/campus/${campus.id}`} className="card-link">
+              <img src={campus.imageUrl} alt={campus.name} />
+              <h2>{campus.name}</h2>
+              <h4>campus id: {campus.id}</h4>
+            </Link>
             <p>
-              <a
-                href={`https://www.google.com/maps/search/?api=1&query=${
-                  encodeURIComponent(campus.address)
-                }`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="map-link"
-                onClick={(e) => e.stopPropagation()} // prevents triggering the Link click
-              >
+              <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(campus.address)}`}
+                target="_blank" rel="noopener noreferrer" className="map-link">
                 {campus.address}
               </a>
             </p>
             <p>{campus.description}</p>
-          </Link>
+            <button onClick={() => deleteCampus(campus.id)} className="delete-btn">
+              Delete
+            </button>
+          </div>
         ))}
       </div>
 

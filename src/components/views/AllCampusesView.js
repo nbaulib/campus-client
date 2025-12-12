@@ -41,9 +41,9 @@ const AllCampusesView = (props) => {
               </a>
             </p>
             <p>{campus.description}</p>
-            <button onClick={() => editCampus(campus.id)} className="delete-btn">
-              Edit
-            </button>
+            <Link to={`editcampus/:id`}>
+              <button>Edit</button>
+            </Link>
             <button onClick={() => deleteCampus(campus.id)} className="delete-btn">
               Delete
             </button>

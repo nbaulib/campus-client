@@ -53,6 +53,7 @@ const AllCampusesView = (props) => {
               </a>
             </p>
             <p>{campus.description}</p>
+            <button onClick={() => deleteStudent(campus.id)}>Delete</button>
           </Link>
         ))}
       </div>

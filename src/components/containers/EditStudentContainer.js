@@ -26,7 +26,8 @@ class EditStudentContainer extends Component {
       gpa: "", 
       redirect: false,
       redirectId: null,
-      loaded: false
+      loaded: false,
+      errors: {}
     };
   }
 
@@ -77,6 +78,8 @@ class EditStudentContainer extends Component {
     }
     return /\.(jpeg|jpg|gif|png|webp|bmp|svg)$/i.test(url);
   }
+
+  isValidGPA = (gpa) => gpa === "" || (parseFloat(gpa) >= 0 && parseFloat(gpa) <= 4);
 
   // Take action after user click the submit button
   handleSubmit = async event => {

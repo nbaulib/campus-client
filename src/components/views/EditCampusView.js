@@ -46,7 +46,7 @@ const Form = styled("form")({
   padding: "10px",
 });
 
-const EditCampusView = ({ handleChange, handleSubmit }) => {
+const EditCampusView = ({name, address, description, imageUrl, handleChange, handleSubmit }) => {
   return (
     <Box>
       <Typography variant="h4">
@@ -62,16 +62,16 @@ const EditCampusView = ({ handleChange, handleSubmit }) => {
 
         <Form onSubmit={handleSubmit}>
           <Label htmlFor="name">Name:</Label>
-          <Input type="text" name="name" onChange={handleChange} required />
+          <Input type="text" name="name" value={name} onChange={handleChange} required />
 
           <Label htmlFor="address">Address:</Label>
-          <Input type="text" name="address" onChange={handleChange} required />
+          <Input type="text" name="address" value={address} onChange={handleChange} required />
 
           <Label htmlFor="description">Description:</Label>
-          <Input type="text" name="description" onChange={handleChange} />
+          <Input type="text" name="description" value={description} onChange={handleChange} />
 
           <Label htmlFor="imageUrl">Image Url:</Label>
-          <Input type="text" name="imageUrl" onChange={handleChange} />
+          <Input type="text" name="imageUrl" value={imageUrl} onChange={handleChange} />
 
           <Box sx={{ marginTop: 3 }}>
             <Button variant="contained" color="primary" type="submit">

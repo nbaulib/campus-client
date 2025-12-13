@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const AllCampusesView = (props) => {
   // If there is no campus, display a message.
-  const { deleteCampus, editCampus } = props;
+  const { deleteCampus } = props;
   if (!props.allCampuses.length) {
     return (
       <div className="empty-view">

@@ -12,7 +12,7 @@ const HomePageView = ({ totalCampuses, totalStudents }) => {
       <h1>Home Page</h1>
 
       <p>
-        Manage campuses and students from a single interface.
+        Manage campuses and students.
       </p>
 
       <p>Total Campuses: {totalCampuses}</p>

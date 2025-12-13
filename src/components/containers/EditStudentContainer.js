@@ -69,6 +69,15 @@ class EditStudentContainer extends Component {
     });
   }
 
+  isValidImageUrl = (url) => {
+    try {
+      new URL(url);
+    } catch (_) {
+      return false;
+    }
+    return /\.(jpeg|jpg|gif|png|webp|bmp|svg)$/i.test(url);
+  }
+
   // Take action after user click the submit button
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.

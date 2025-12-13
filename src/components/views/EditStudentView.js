@@ -46,7 +46,7 @@ const Form = styled("form")({
   padding: "10px",
 });
 
-const EditStudentView = ({ handleChange, handleSubmit }) => {
+const EditStudentView = ({firstname, lastname, email, imageUrl, gpa, campusId, handleChange, handleSubmit  }) => {
   return (
     <Box>
       <Typography variant="h4">
@@ -62,22 +62,22 @@ const EditStudentView = ({ handleChange, handleSubmit }) => {
 
         <Form onSubmit={handleSubmit}>
           <Label htmlFor="firstname">First Name:</Label>
-          <Input type="text" name="firstname" onChange={handleChange} required />
+          <Input type="text" name="firstname" value={firstname} onChange={handleChange} required />
 
           <Label htmlFor="lastname">Last Name:</Label>
-          <Input type="text" name="lastname" onChange={handleChange} required />
+          <Input type="text" name="lastname" value={lastname} onChange={handleChange} required />
 
           <Label htmlFor="campusId">Campus Id:</Label>
-          <Input type="text" name="campusId" onChange={handleChange} />
+          <Input type="text" name="campusId" value={campusId} onChange={handleChange} />
 
           <Label htmlFor="email">Email:</Label>
-          <Input type="text" name="email" onChange={handleChange} required />
+          <Input type="text" name="email" value={email} onChange={handleChange} required />
 
           <Label htmlFor="GPA">GPA:</Label>
-          <Input type="text" name="GPA" onChange={handleChange} placeholder="0.0 - 4.0" step="0.01" min="0" />
+          <Input type="text" name="GPA" value={gpa} onChange={handleChange} placeholder="0.0 - 4.0" step="0.01" min="0" />
 
           <Label htmlFor="imageUrl">Image Url:</Label>
-          <Input type="text" name="imageUrl" onChange={handleChange} />
+          <Input type="text" name="imageUrl" value={imageUrl} onChange={handleChange} />
 
           <Box sx={{ marginTop: 3 }}>
             <Button variant="contained" color="primary" type="submit">

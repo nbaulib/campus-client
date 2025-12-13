@@ -56,7 +56,7 @@ const EditCampusView = ({name, address, description, imageUrl, handleChange, han
       <FormContainer>
         <FormTitle>
           <Typography>
-            Add a Campus
+            Edit a Campus
           </Typography>
         </FormTitle>
 

@@ -41,7 +41,7 @@ const AllCampusesView = (props) => {
               </a>
             </p>
             <p>{campus.description}</p>
-            <Link to={`editcampus/:id`}>
+            <Link to={`editcampus/${campus.id}`}>
               <button>Edit</button>
             </Link>
             <button onClick={() => deleteCampus(campus.id)} className="delete-btn">

@@ -18,7 +18,8 @@ class EditStudentContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      firstname: "",
+      lastname:"",
       imageUrl: "",
       campusId: "",
       email: "",
@@ -50,7 +51,8 @@ class EditStudentContainer extends Component {
     const { student } = this.props;
     if (student && student.id) {
       this.setState({
-        name: student.name || "",
+        firstname: student.firstname || "",
+        lastname: student.lastname || "",
         imageUrl: student.imageUrl || "",
         campusId: student.campusId || "",
         email: student.email || "",
@@ -75,7 +77,8 @@ class EditStudentContainer extends Component {
 
     const student = {
       id: studentId,
-      name: this.state.name,
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
       campusId: this.state.campusId,
       email: this.state.email,
       gpa: this.state.gpa,

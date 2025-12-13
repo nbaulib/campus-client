@@ -81,6 +81,8 @@ class EditStudentContainer extends Component {
 
   isValidGPA = (gpa) => gpa === "" || (parseFloat(gpa) >= 0 && parseFloat(gpa) <= 4);
 
+  isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
   // Take action after user click the submit button
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.

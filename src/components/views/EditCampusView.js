@@ -7,6 +7,7 @@ It constructs a React component to display the edit campus page.
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 
 // Styled components
@@ -26,56 +27,77 @@ const FormTitle = styled(Box)({
   padding: "8px",
 });
 
-const Label = styled("label")({
-  color: "#11153e",
-  fontWeight: "bold",
-  display: "block",
-  marginTop: "10px",
-});
-
-const Input = styled("input")({
-  padding: "5px",
-  width: "90%",
-  marginTop: "5px",
-  borderRadius: "3px",
-  border: "1px solid #ccc",
-});
-
 const Form = styled("form")({
   textAlign: "center",
   padding: "10px",
 });
 
-const EditCampusView = ({name, address, description, imageUrl, handleChange, handleSubmit }) => {
+const EditCampusView = ({ formData, handleChange, handleSubmit, errors }) => {
   return (
     <Box>
-      <Typography variant="h4">
-        Edit Campus
+      <Typography variant="h4" sx={{ textAlign: "center", marginTop: 3 }}>
+        New Campus
       </Typography>
 
       <FormContainer>
         <FormTitle>
-          <Typography>
-            Edit a Campus
-          </Typography>
+          <Typography>Add a Campus</Typography>
         </FormTitle>
 
         <Form onSubmit={handleSubmit}>
-          <Label htmlFor="name">Name:</Label>
-          <Input type="text" name="name" value={name} onChange={handleChange} required />
 
-          <Label htmlFor="address">Address:</Label>
-          <Input type="text" name="address" value={address} onChange={handleChange} required />
+          <TextField
+            label="Name"
+            name="name"
+            value={formData.name || ""}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            required
+            error={!!errors.name}
+            helperText={errors.name}
+          />
 
-          <Label htmlFor="description">Description:</Label>
-          <Input type="text" name="description" value={description} onChange={handleChange} />
+          <TextField
+            label="Address"
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            required
+            error={!!errors.address}
+            helperText={errors.address}
+          />
 
-          <Label htmlFor="imageUrl">Image Url:</Label>
-          <Input type="text" name="imageUrl" value={imageUrl} onChange={handleChange} />
+          <TextField
+            label="Description"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            multiline
+          />
 
-          <Box sx={{ marginTop: 3 }}>
+          <TextField
+            label="Image URL"
+            name="imageUrl"
+            value={formData.imageUrl}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            error={!!errors.imageUrl}
+            helperText={errors.imageUrl}
+          />
+
+          <Box sx={{ marginTop: 3, textAlign: "center" }}>
             <Button variant="contained" color="primary" type="submit">
-              Save
+              Submit
             </Button>
           </Box>
         </Form>

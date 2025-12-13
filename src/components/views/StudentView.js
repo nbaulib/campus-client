@@ -11,7 +11,7 @@ const StudentView = (props) => {
 
   // Render a single Student view 
   return (
-    <div>
+    <div className="single">
       <h1>{student.firstname + " " + student.lastname}</h1>
       {student.campus ? (
         <Link to={`/campus/${student.campus.id}`}>

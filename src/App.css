@@ -45,3 +45,7 @@
 .empty-view button {
   font-size: 1rem;
 }
+
+.single img {
+  max-width: 600px;
+}

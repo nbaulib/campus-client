@@ -61,10 +61,10 @@ export const deleteCampusThunk = campusId => async dispatch => {  // The THUNK
 };
 
 // EDIT Campus
-export const editCampusThunk = (campusId) => async (dispatch) => {  // The THUNK
+export const editCampusThunk = (campus) => async (dispatch) => {  // The THUNK
   try {
     // API "post" call to add "student" object's data to database
-    let res = await axios.put(`/api/campuses/${campusId}`, campusId);  
+    let res = await axios.put(`/api/campuses/${campus.id}`, campus);  
     // Call Action Creator to return Action object (type + payload with new students data)
     // Then dispatch the Action object to Reducer to update state 
     dispatch(ac.editCampus(res.data));

@@ -133,14 +133,16 @@ class EditStudentContainer extends Component {
       <div>
         <Header />
         <EditStudentView
-          firstname={this.state.firstname}
-          lastname={this.state.lastname}
-          imageUrl={this.state.imageUrl}
-          campusId={this.state.campusId}
-          email={this.state.email}
-          gpa={this.state.gpa}
+          // firstname={this.state.firstname}
+          // lastname={this.state.lastname}
+          // imageUrl={this.state.imageUrl}
+          // campusId={this.state.campusId}
+          // email={this.state.email}
+          // gpa={this.state.gpa}
+          formData={this.state}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
+          errors={this.state.errors}
         />
       </div>
     );

@@ -24,6 +24,7 @@ class EditCampusContainer extends Component {
       imageUrl: "",
       redirect: false,
       redirectId: null,
+      errors: {},
       loaded: false
     };
   }
@@ -65,9 +66,29 @@ class EditCampusContainer extends Component {
     });
   }
 
+  isValidImageUrl = (url) => {
+    try {
+      new URL(url);
+    } catch (_) {
+      return false;
+    }
+    return /\.(jpeg|jpg|gif|png|webp|bmp|svg)$/i.test(url);
+  }
+
   // Take action after user click the submit button
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
+
+    const errors = {};
+    if (!this.state.name.trim()) errors.name = "Name is required";
+    if (!this.state.address.trim()) errors.address = "Address is required";
+    if (this.state.imageUrl && !this.isValidImageUrl(this.state.imageUrl))
+      errors.imageUrl = "Please enter a valid image URL";
+
+    if (Object.keys(errors).length > 0) {
+      this.setState({ errors });
+      return;
+    }
 
     const campusId = this.props.match.params.id;
 
@@ -106,12 +127,14 @@ class EditCampusContainer extends Component {
       <div>
         <Header />
         <EditCampusView
-          name={this.state.name}
-          address={this.state.address}
-          description={this.state.description}
-          imageUrl={this.state.imageUrl}
+          // name={this.state.name}
+          // address={this.state.address}
+          // description={this.state.description}
+          // imageUrl={this.state.imageUrl}
+          formData={this.state}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
+          errors={this.state.errors}
         />
       </div>
     );

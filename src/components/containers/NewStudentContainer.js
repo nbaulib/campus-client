@@ -20,45 +20,83 @@ class NewStudentContainer extends Component {
     this.state = {
       firstname: "",
       lastname: "",
-      campusId: null,
+      campusId: "",
+      email: "",
+      GPA: "",
+      imageUrl: "",
       redirect: false,
-      redirectId: null
+      redirectId: null,
+      errors: {}
     };
   }
 
   // Capture input data when it is entered
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
+
+  isValidEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
+  isValidGPA = (gpa) => {
+    if (gpa === "") return true; // optional
+    const num = parseFloat(gpa);
+    return !isNaN(num) && num >= 0 && num <= 4;
+  }
+
+  isValidImageUrl = (url) => {
+    if (!url) return true; // optional
+    try {
+      new URL(url);
+      return /\.(jpeg|jpg|gif|png|webp|bmp|svg)$/i.test(url);
+    } catch (_) {
+      return false;
+    }
   }
 
   // Take action after user click the submit button
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
 
-    let student = {
+    const errors = {};
+    if (!this.state.firstname.trim()) errors.firstname = "First name is required";
+    if (!this.state.lastname.trim()) errors.lastname = "Last name is required";
+    if (!this.state.email.trim()) errors.email = "Email is required";
+    else if (!this.isValidEmail(this.state.email)) errors.email = "Invalid email format";
+    if (!this.isValidGPA(this.state.GPA)) errors.GPA = "GPA must be between 0.0 and 4.0";
+    if (!this.isValidImageUrl(this.state.imageUrl)) errors.imageUrl = "Invalid image URL";
+
+    if (Object.keys(errors).length > 0) {
+      this.setState({ errors });
+      return;
+    }
+
+    const student = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
-      campusId: this.state.campusId,
+      campusId: this.state.campusId || null,
       email: this.state.email,
-      GPA: this.state.GPA,
-      imageUrl: this.state.imageUrl,
+      GPA: this.state.GPA ? parseFloat(this.state.GPA) : null,
+      imageUrl: this.state.imageUrl.trim() || "https://placehold.co/600x400.png",
     };
 
     // Add new student in back-end database
-    let newStudent = await this.props.addStudent(student);
+    const newStudent = await this.props.addStudent(student);
 
     // Update state, and trigger redirect to show the new student
     this.setState({
       firstname: "",
       lastname: "",
-      campusId: null,
+      campusId: "",
       email: "",
-      GPA: null,
+      GPA: "",
       imageUrl: "",
       redirect: true,
-      redirectId: newStudent.id
+      redirectId: newStudent.id,
+      errors: {}
     });
   }
 
@@ -79,8 +117,10 @@ class NewStudentContainer extends Component {
       <div>
         <Header />
         <NewStudentView
+          formData={this.state}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
+          errors={this.state.errors}
         />
       </div>
     );

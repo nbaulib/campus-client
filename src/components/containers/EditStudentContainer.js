@@ -26,7 +26,8 @@ class EditStudentContainer extends Component {
       gpa: "", 
       redirect: false,
       redirectId: null,
-      loaded: false
+      loaded: false,
+      errors: {}
     };
   }
 
@@ -56,7 +57,8 @@ class EditStudentContainer extends Component {
         imageUrl: student.imageUrl || "",
         campusId: student.campusId || "",
         email: student.email || "",
-        gpa: this.state.gpa === "" ? null : parseFloat(this.state.gpa),
+        // gpa: this.state.gpa === "" ? null : parseFloat(this.state.gpa),
+        gpa: student.gpa !== null && student.gpa !== undefined ? student.gpa : "",
         loaded: true
       });
     }
@@ -69,9 +71,35 @@ class EditStudentContainer extends Component {
     });
   }
 
+  isValidImageUrl = (url) => {
+    try {
+      new URL(url);
+    } catch (_) {
+      return false;
+    }
+    return /\.(jpeg|jpg|gif|png|webp|bmp|svg)$/i.test(url);
+  }
+
+  isValidGPA = (gpa) => gpa === "" || (parseFloat(gpa) >= 0 && parseFloat(gpa) <= 4);
+
+  isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
   // Take action after user click the submit button
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
+
+    const errors = {};
+    if (!this.state.firstname.trim()) errors.firstname = "First name is required";
+    if (!this.state.lastname.trim()) errors.lastname = "Last name is required";
+    if (!this.state.email.trim()) errors.email = "Email is required";
+    else if (!this.isValidEmail(this.state.email)) errors.email = "Invalid email format";
+    if (!this.isValidGPA(this.state.gpa)) errors.gpa = "GPA must be between 0.0 and 4.0";
+    if (!this.isValidImageUrl(this.state.imageUrl)) errors.imageUrl = "Invalid image URL";
+
+    if (Object.keys(errors).length > 0) {
+      this.setState({ errors });
+      return;
+    }
 
     const studentId = this.props.match.params.id;
 
@@ -79,10 +107,11 @@ class EditStudentContainer extends Component {
       id: studentId,
       firstname: this.state.firstname,
       lastname: this.state.lastname,
-      campusId: this.state.campusId,
+      campusId: this.state.campusId || null,
       email: this.state.email,
-      gpa: this.state.gpa,
-      imageUrl: this.state.imageUrl
+      // GPA: this.state.GPA ? parseFloat(this.state.GPA) : null,
+      gpa: this.state.gpa === "" ? null : parseFloat(this.state.gpa),
+      imageUrl: this.state.imageUrl || null
     };
 
     // Add edit student in back-end database
@@ -91,7 +120,8 @@ class EditStudentContainer extends Component {
     // Update state, and trigger redirect to show the edit student
     this.setState({
       redirect: true,
-      redirectId: updatedStudent.id
+      redirectId: updatedStudent.id,
+      errors: {}
     });
   }
 
@@ -111,14 +141,16 @@ class EditStudentContainer extends Component {
       <div>
         <Header />
         <EditStudentView
-          firstname={this.state.firstname}
-          lastname={this.state.lastname}
-          imageUrl={this.state.imageUrl}
-          campusId={this.state.campusId}
-          email={this.state.email}
-          gpa={this.state.gpa}
+          // firstname={this.state.firstname}
+          // lastname={this.state.lastname}
+          // imageUrl={this.state.imageUrl}
+          // campusId={this.state.campusId}
+          // email={this.state.email}
+          // gpa={this.state.gpa}
+          formData={this.state}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
+          errors={this.state.errors}
         />
       </div>
     );

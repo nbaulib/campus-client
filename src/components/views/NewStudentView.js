@@ -4,9 +4,11 @@ NewStudentView.js
 The Views component is responsible for rendering web page with data provided by the corresponding Container component.
 It constructs a React component to display the new student page.
 ================================================== */
+import React from "react";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 
 // Styled components
@@ -16,6 +18,7 @@ const FormContainer = styled(Box)({
   borderRadius: "5px",
   margin: "auto",
   marginTop: "20px",
+  padding: "20px",
 });
 
 const FormTitle = styled(Box)({
@@ -26,58 +29,95 @@ const FormTitle = styled(Box)({
   padding: "8px",
 });
 
-const Label = styled("label")({
-  color: "#11153e",
-  fontWeight: "bold",
-  display: "block",
-  marginTop: "10px",
-});
-
-const Input = styled("input")({
-  padding: "5px",
-  width: "90%",
-  marginTop: "5px",
-  borderRadius: "3px",
-  border: "1px solid #ccc",
-});
-
 const Form = styled("form")({
   textAlign: "center",
-  padding: "10px",
 });
 
-const NewStudentView = ({ handleChange, handleSubmit }) => {
+const NewStudentView = ({ formData, errors, handleChange, handleSubmit }) => {
   return (
     <Box>
-      <Typography variant="h4">
+      <Typography variant="h4" align="center" sx={{ mt: 3 }}>
         New Student
       </Typography>
 
       <FormContainer>
         <FormTitle>
-          <Typography>
-            Add a Student
-          </Typography>
+          <Typography variant="h6">Add a Student</Typography>
         </FormTitle>
 
         <Form onSubmit={handleSubmit}>
-          <Label htmlFor="firstname">First Name:</Label>
-          <Input type="text" name="firstname" onChange={handleChange} required />
+          <TextField
+            label="First Name"
+            name="firstname"
+            value={formData.firstname || ""}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            error={!!errors.firstname}
+            helperText={errors.firstname}
+            required
+          />
 
-          <Label htmlFor="lastname">Last Name:</Label>
-          <Input type="text" name="lastname" onChange={handleChange} required />
+          <TextField
+            label="Last Name"
+            name="lastname"
+            value={formData.lastname || ""}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            error={!!errors.lastname}
+            helperText={errors.lastname}
+            required
+          />
 
-          <Label htmlFor="campusId">Campus Id:</Label>
-          <Input type="text" name="campusId" onChange={handleChange} />
+          <TextField
+            label="Campus ID"
+            name="campusId"
+            value={formData.campusId || ""}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            error={!!errors.campusId}
+            helperText={errors.campusId}
+            type="number"
+          />
 
-          <Label htmlFor="email">Email:</Label>
-          <Input type="text" name="email" onChange={handleChange} required />
+          <TextField
+            label="Email"
+            name="email"
+            value={formData.email || ""}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            error={!!errors.email}
+            helperText={errors.email}
+            required
+          />
 
-          <Label htmlFor="GPA">GPA:</Label>
-          <Input type="text" name="GPA" onChange={handleChange} placeholder="0.0 - 4.0" step="0.01" min="0" />
+          <TextField
+            label="GPA"
+            name="GPA"
+            value={formData.GPA || ""}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            error={!!errors.GPA}
+            helperText={errors.GPA}
+            placeholder="0.0 - 4.0"
+            type="number"
+            inputProps={{ step: 0.01, min: 0, max: 4 }}
+          />
 
-          <Label htmlFor="imageUrl">Image Url:</Label>
-          <Input type="text" name="imageUrl" onChange={handleChange} />
+          <TextField
+            label="Image URL"
+            name="imageUrl"
+            value={formData.imageUrl || ""}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            error={!!errors.imageUrl}
+            helperText={errors.imageUrl}
+          />
 
           <Box sx={{ marginTop: 3 }}>
             <Button variant="contained" color="primary" type="submit">

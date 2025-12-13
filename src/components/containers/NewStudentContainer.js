@@ -20,17 +20,41 @@ class NewStudentContainer extends Component {
     this.state = {
       firstname: "",
       lastname: "",
-      campusId: null,
+      campusId: "",
+      email: "",
+      GPA: "",
+      imageUrl: "",
       redirect: false,
-      redirectId: null
+      redirectId: null,
+      errors: {}
     };
   }
 
   // Capture input data when it is entered
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
+
+  isValidEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
+  isValidGPA = (gpa) => {
+    if (gpa === "") return true; // optional
+    const num = parseFloat(gpa);
+    return !isNaN(num) && num >= 0 && num <= 4;
+  }
+
+  isValidImageUrl = (url) => {
+    if (!url) return true; // optional
+    try {
+      new URL(url);
+      return /\.(jpeg|jpg|gif|png|webp|bmp|svg)$/i.test(url);
+    } catch (_) {
+      return false;
+    }
   }
 
   // Take action after user click the submit button

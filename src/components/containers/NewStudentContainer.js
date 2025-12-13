@@ -80,7 +80,7 @@ class NewStudentContainer extends Component {
       campusId: this.state.campusId || null,
       email: this.state.email,
       GPA: this.state.GPA ? parseFloat(this.state.GPA) : null,
-      imageUrl: this.state.imageUrl,
+      imageUrl: this.state.imageUrl.trim() || "https://placehold.co/600x400.png",
     };
 
     // Add new student in back-end database

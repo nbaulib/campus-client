@@ -59,7 +59,7 @@ class NewCampusContainer extends Component {
       name: this.state.name,
       address: this.state.address,
       description: this.state.description,
-      imageUrl: this.state.imageUrl
+      imageUrl: this.state.imageUrl.trim() || "https://placehold.co/600x400.png",
     };
 
     const newCampus = await this.props.addCampus(campus);

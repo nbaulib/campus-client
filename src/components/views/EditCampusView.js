@@ -36,12 +36,12 @@ const EditCampusView = ({ formData, handleChange, handleSubmit, errors }) => {
   return (
     <Box>
       <Typography variant="h4" sx={{ textAlign: "center", marginTop: 3 }}>
-        New Campus
+        Edit Campus
       </Typography>
 
       <FormContainer>
         <FormTitle>
-          <Typography>Add a Campus</Typography>
+          <Typography>Edit a Campus</Typography>
         </FormTitle>
 
         <Form onSubmit={handleSubmit}>
@@ -97,7 +97,7 @@ const EditCampusView = ({ formData, handleChange, handleSubmit, errors }) => {
 
           <Box sx={{ marginTop: 3, textAlign: "center" }}>
             <Button variant="contained" color="primary" type="submit">
-              Submit
+              Save
             </Button>
           </Box>
         </Form>

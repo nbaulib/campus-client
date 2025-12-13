@@ -23,7 +23,7 @@ class EditStudentContainer extends Component {
       imageUrl: "",
       campusId: "",
       email: "",
-      gpa: "",
+      gpa: "", 
       redirect: false,
       redirectId: null,
       loaded: false
@@ -56,7 +56,7 @@ class EditStudentContainer extends Component {
         imageUrl: student.imageUrl || "",
         campusId: student.campusId || "",
         email: student.email || "",
-        gpa: student.gpa || "",
+        gpa: this.state.gpa === "" ? null : parseFloat(this.state.gpa),
         loaded: true
       });
     }
@@ -86,7 +86,7 @@ class EditStudentContainer extends Component {
     };
 
     // Add edit student in back-end database
-    // let editStudent = await this.props.editStudent(student);
+    let editStudent = await this.props.editStudent(student);
     const updatedStudent = await this.props.editStudent(student);
 
     // Update state, and trigger redirect to show the edit student

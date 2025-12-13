@@ -73,8 +73,8 @@ const EditStudentView = ({firstname, lastname, email, imageUrl, gpa, campusId, h
           <Label htmlFor="email">Email:</Label>
           <Input type="text" name="email" value={email} onChange={handleChange} required />
 
-          <Label htmlFor="GPA">GPA:</Label>
-          <Input type="text" name="GPA" value={gpa} onChange={handleChange} placeholder="0.0 - 4.0" step="0.01" min="0" />
+          <Label htmlFor="gpa">GPA:</Label>
+          <Input type="text" name="gpa" value={gpa} onChange={handleChange} placeholder="0.0 - 4.0" step="0.01" min="0" />
 
           <Label htmlFor="imageUrl">Image Url:</Label>
           <Input type="text" name="imageUrl" value={imageUrl} onChange={handleChange} />

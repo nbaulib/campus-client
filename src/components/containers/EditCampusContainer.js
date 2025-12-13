@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import EditCampusView from '../views/EditCampusView';
-import { addCampusThunk } from '../../store/thunks';
+import { fetchCampusThunk, editCampusThunk } from '../../store/thunks';
 
 class EditCampusContainer extends Component {
   // Initialize state
@@ -20,9 +20,33 @@ class EditCampusContainer extends Component {
     this.state = {
       name: "",
       address: "",
+      description: "",
+      imageUrl: "",
       redirect: false,
-      redirectId: null
+      redirectId: null,
+      loaded: false
     };
+  }
+
+  async componentDidMount() {
+    const campusId = this.props.match.params.id;
+
+    // Fetch the campus if not already in Redux state
+    await this.props.fetchCampus(campusId);
+
+    // Get campus from Redux state (assuming it's now in props.campus)
+    const campus = this.props.campus;
+
+    // populate with curr data
+    if (campus) {
+      this.setState({
+        name: campus.name || "",
+        address: campus.address || "",
+        description: campus.description || "",
+        imageUrl: campus.imageUrl || "",
+        loaded: true
+      });
+    }
   }
 
   // Capture input data when it is entered
@@ -36,30 +60,25 @@ class EditCampusContainer extends Component {
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
 
-    let campus = {
+    const campusId = this.props.match.params.id;
+
+    const campus = {
+      id: campusId,
       name: this.state.name,
       address: this.state.address,
       description: this.state.description,
-      imageUrl: this.state.imageUrl,
+      imageUrl: this.state.imageUrl
     };
 
     // Add edit campus in back-end database
-    let editCampus = await this.props.addCampus(campus);
+    // let editCampus = await this.props.editCampus(campus);
+    const updatedCampus = await this.props.editCampus(campus);
 
     // Update state, and trigger redirect to show the edit campus
     this.setState({
-      name: "",
-      address: "",
-      description: null,
-      imageUrl: "",
       redirect: true,
-      redirectId: editCampus.id
+      redirectId: updatedCampus.id
     });
-  }
-
-  // Unmount when the component is being removed from the DOM:
-  componentWillUnmount() {
-    this.setState({ redirect: false, redirectId: null });
   }
 
   // Render edit campus input form
@@ -69,11 +88,19 @@ class EditCampusContainer extends Component {
       return (<Redirect to={`/campus/${this.state.redirectId}`} />)
     }
 
+    if (!this.state.loaded) {
+      return <div>Loading campus...</div>;
+    }
+
     // Display the input form via the corresponding View component
     return (
       <div>
         <Header />
         <EditCampusView
+          name={this.state.name}
+          address={this.state.address}
+          description={this.state.description}
+          imageUrl={this.state.imageUrl}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
         />
@@ -82,16 +109,24 @@ class EditCampusContainer extends Component {
   }
 }
 
+const mapState = (state) => {
+  return {
+    campus: state.campus
+  };
+}
+
+
 // The following input argument is passed to the "connect" function used by "EditCampusContainer" component to connect to Redux Store.
 // The "mapDispatch" argument is used to dispatch Action (Redux Thunk) to Redux Store.
 // The "mapDispatch" calls the specific Thunk to dispatch its action. The "dispatch" is a function of Redux Store.
 const mapDispatch = (dispatch) => {
   return ({
-    addCampus: (campus) => dispatch(addCampusThunk(campus)),
+    editCampus: (campus) => dispatch(editCampusThunk(campus)),
+    fetchCampus: (campusId) => dispatch(fetchCampusThunk(campusId))
   })
 }
 
 // Export store-connected container by default
 // EditCampusContainer uses "connect" function to connect to Redux Store and to read values from the Store 
 // (and re-read the values when the Store State updates).
-export default connect(null, mapDispatch)(EditCampusContainer);
+export default connect(mapState, mapDispatch)(EditCampusContainer);

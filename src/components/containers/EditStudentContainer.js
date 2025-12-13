@@ -19,7 +19,6 @@ class EditStudentContainer extends Component {
     super(props);
     this.state = {
       name: "",
-      description: "",
       imageUrl: "",
       campusId: "",
       email: "",
@@ -52,7 +51,6 @@ class EditStudentContainer extends Component {
     if (student && student.id) {
       this.setState({
         name: student.name || "",
-        description: student.description || "",
         imageUrl: student.imageUrl || "",
         campusId: student.campusId || "",
         email: student.email || "",
@@ -113,7 +111,6 @@ class EditStudentContainer extends Component {
         <EditStudentView
           name={this.state.name}
           address={this.state.address}
-          description={this.state.description}
           imageUrl={this.state.imageUrl}
           campusId={this.state.campusId}
           email={this.state.email}

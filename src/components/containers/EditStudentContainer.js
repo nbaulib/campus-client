@@ -82,6 +82,19 @@ class EditStudentContainer extends Component {
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
 
+    const errors = {};
+    if (!this.state.firstname.trim()) errors.firstname = "First name is required";
+    if (!this.state.lastname.trim()) errors.lastname = "Last name is required";
+    if (!this.state.email.trim()) errors.email = "Email is required";
+    else if (!this.isValidEmail(this.state.email)) errors.email = "Invalid email format";
+    if (!this.isValidGPA(this.state.GPA)) errors.GPA = "GPA must be between 0.0 and 4.0";
+    if (!this.isValidImageUrl(this.state.imageUrl)) errors.imageUrl = "Invalid image URL";
+
+    if (Object.keys(errors).length > 0) {
+      this.setState({ errors });
+      return;
+    }
+
     const studentId = this.props.match.params.id;
 
     const student = {

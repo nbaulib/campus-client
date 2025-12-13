@@ -19,7 +19,7 @@ class EditStudentContainer extends Component {
     super(props);
     this.state = {
       firstname: "",
-      lastname:"",
+      lastname: "",
       imageUrl: "",
       campusId: "",
       email: "",
@@ -112,8 +112,8 @@ class EditStudentContainer extends Component {
       <div>
         <Header />
         <EditStudentView
-          name={this.state.name}
-          address={this.state.address}
+          firstname={this.state.firstname}
+          lastname={this.state.lastname}
           imageUrl={this.state.imageUrl}
           campusId={this.state.campusId}
           email={this.state.email}

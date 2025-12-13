@@ -64,6 +64,12 @@ const EditCampusView = ({name, address, description, imageUrl, handleChange, han
           <Label htmlFor="name">Name:</Label>
           <Input type="text" name="name" value={name} onChange={handleChange} required />
 
+          <Label htmlFor="address">Address:</Label>
+          <Input type="text" name="address" value={address} onChange={handleChange} required />
+
+          <Label htmlFor="description">Description:</Label>
+          <Input type="text" name="description" value={description} onChange={handleChange} />
+
           <Label htmlFor="imageUrl">Image Url:</Label>
           <Input type="text" name="imageUrl" value={imageUrl} onChange={handleChange} />
 

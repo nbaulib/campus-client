@@ -57,7 +57,8 @@ class EditStudentContainer extends Component {
         imageUrl: student.imageUrl || "",
         campusId: student.campusId || "",
         email: student.email || "",
-        gpa: this.state.gpa === "" ? null : parseFloat(this.state.gpa),
+        // gpa: this.state.gpa === "" ? null : parseFloat(this.state.gpa),
+        gpa: student.gpa !== null && student.gpa !== undefined ? student.gpa : "",
         loaded: true
       });
     }
@@ -92,7 +93,7 @@ class EditStudentContainer extends Component {
     if (!this.state.lastname.trim()) errors.lastname = "Last name is required";
     if (!this.state.email.trim()) errors.email = "Email is required";
     else if (!this.isValidEmail(this.state.email)) errors.email = "Invalid email format";
-    if (!this.isValidGPA(this.state.GPA)) errors.GPA = "GPA must be between 0.0 and 4.0";
+    if (!this.isValidGPA(this.state.gpa)) errors.gpa = "GPA must be between 0.0 and 4.0";
     if (!this.isValidImageUrl(this.state.imageUrl)) errors.imageUrl = "Invalid image URL";
 
     if (Object.keys(errors).length > 0) {
@@ -106,10 +107,11 @@ class EditStudentContainer extends Component {
       id: studentId,
       firstname: this.state.firstname,
       lastname: this.state.lastname,
-      campusId: this.state.campusId,
+      campusId: this.state.campusId || null,
       email: this.state.email,
-      gpa: this.state.gpa,
-      imageUrl: this.state.imageUrl
+      // GPA: this.state.GPA ? parseFloat(this.state.GPA) : null,
+      gpa: this.state.gpa === "" ? null : parseFloat(this.state.gpa),
+      imageUrl: this.state.imageUrl || null
     };
 
     // Add edit student in back-end database
@@ -118,7 +120,8 @@ class EditStudentContainer extends Component {
     // Update state, and trigger redirect to show the edit student
     this.setState({
       redirect: true,
-      redirectId: updatedStudent.id
+      redirectId: updatedStudent.id,
+      errors: {}
     });
   }
 

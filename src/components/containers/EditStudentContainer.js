@@ -19,9 +19,11 @@ class EditStudentContainer extends Component {
     super(props);
     this.state = {
       name: "",
-      address: "",
       description: "",
       imageUrl: "",
+      campusId: "",
+      email: "",
+      gpa: "",
       redirect: false,
       redirectId: null,
       loaded: false
@@ -50,9 +52,11 @@ class EditStudentContainer extends Component {
     if (student && student.id) {
       this.setState({
         name: student.name || "",
-        address: student.address || "",
         description: student.description || "",
         imageUrl: student.imageUrl || "",
+        campusId: student.campusId || "",
+        email: student.email || "",
+        gpa: student.gpa || "",
         loaded: true
       });
     }
@@ -74,8 +78,9 @@ class EditStudentContainer extends Component {
     const student = {
       id: studentId,
       name: this.state.name,
-      address: this.state.address,
-      description: this.state.description,
+      campusId: this.state.campusId,
+      email: this.state.email,
+      gpa: this.state.gpa,
       imageUrl: this.state.imageUrl
     };
 
@@ -110,6 +115,9 @@ class EditStudentContainer extends Component {
           address={this.state.address}
           description={this.state.description}
           imageUrl={this.state.imageUrl}
+          campusId={this.state.campusId}
+          email={this.state.email}
+          gpa={this.state.gpa}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
         />

@@ -7,6 +7,7 @@ It constructs a React component to display the new campus page.
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 
 // Styled components
@@ -26,57 +27,75 @@ const FormTitle = styled(Box)({
   padding: "8px",
 });
 
-const Label = styled("label")({
-  color: "#11153e",
-  fontWeight: "bold",
-  display: "block",
-  marginTop: "10px",
-});
-
-const Input = styled("input")({
-  padding: "5px",
-  width: "90%",
-  marginTop: "5px",
-  borderRadius: "3px",
-  border: "1px solid #ccc",
-});
-
 const Form = styled("form")({
   textAlign: "center",
   padding: "10px",
 });
 
-const NewCampusView = ({ handleChange, handleSubmit }) => {
+const NewCampusView = ({ formData, handleChange, handleSubmit, errors }) => {
   return (
     <Box>
-      <Typography variant="h4">
+      <Typography variant="h4" sx={{ textAlign: "center", marginTop: 3 }}>
         New Campus
       </Typography>
 
       <FormContainer>
         <FormTitle>
-          <Typography>
-            Add a Campus
-          </Typography>
+          <Typography>Add a Campus</Typography>
         </FormTitle>
 
         <Form onSubmit={handleSubmit}>
-          <Label htmlFor="name">Name:</Label>
-          <Input type="text" name="name" onChange={handleChange} required />
 
-          {/* <Label htmlFor="campusId">Campus Id:</Label>
-          <Input type="text" name="campusId" onChange={handleChange} /> */}
+          <TextField
+            label="Name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            required
+            error={!!errors.name}
+            helperText={errors.name}
+          />
 
-          <Label htmlFor="address">Address:</Label>
-          <Input type="text" name="address" onChange={handleChange} required />
+          <TextField
+            label="Address"
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            required
+            error={!!errors.address}
+            helperText={errors.address}
+          />
 
-          <Label htmlFor="description">Description:</Label>
-          <Input type="text" name="description" onChange={handleChange} />
+          <TextField
+            label="Description"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            multiline
+          />
 
-          <Label htmlFor="imageUrl">Image Url:</Label>
-          <Input type="text" name="imageUrl" onChange={handleChange} />
+          <TextField
+            label="Image URL"
+            name="imageUrl"
+            value={formData.imageUrl}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            error={!!errors.imageUrl}
+            helperText={errors.imageUrl}
+          />
 
-          <Box sx={{ marginTop: 3 }}>
+          <Box sx={{ marginTop: 3, textAlign: "center" }}>
             <Button variant="contained" color="primary" type="submit">
               Submit
             </Button>

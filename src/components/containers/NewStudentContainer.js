@@ -61,28 +61,42 @@ class NewStudentContainer extends Component {
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
 
-    let student = {
+    const errors = {};
+    if (!this.state.firstname.trim()) errors.firstname = "First name is required";
+    if (!this.state.lastname.trim()) errors.lastname = "Last name is required";
+    if (!this.state.email.trim()) errors.email = "Email is required";
+    else if (!this.isValidEmail(this.state.email)) errors.email = "Invalid email format";
+    if (!this.isValidGPA(this.state.GPA)) errors.GPA = "GPA must be between 0.0 and 4.0";
+    if (!this.isValidImageUrl(this.state.imageUrl)) errors.imageUrl = "Invalid image URL";
+
+    if (Object.keys(errors).length > 0) {
+      this.setState({ errors });
+      return;
+    }
+
+    const student = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
-      campusId: this.state.campusId,
+      campusId: this.state.campusId || null,
       email: this.state.email,
-      GPA: this.state.GPA,
+      GPA: this.state.GPA ? parseFloat(this.state.GPA) : null,
       imageUrl: this.state.imageUrl,
     };
 
     // Add new student in back-end database
-    let newStudent = await this.props.addStudent(student);
+    const newStudent = await this.props.addStudent(student);
 
     // Update state, and trigger redirect to show the new student
     this.setState({
       firstname: "",
       lastname: "",
-      campusId: null,
+      campusId: "",
       email: "",
-      GPA: null,
+      GPA: "",
       imageUrl: "",
       redirect: true,
-      redirectId: newStudent.id
+      redirectId: newStudent.id,
+      errors: {}
     });
   }
 
@@ -103,8 +117,10 @@ class NewStudentContainer extends Component {
       <div>
         <Header />
         <NewStudentView
+          formData={this.state}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
+          errors={this.state.errors}
         />
       </div>
     );
